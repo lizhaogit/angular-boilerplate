@@ -1,12 +1,15 @@
-'use strict';
+(function(angular) {
 
-// Declare app level module which depends on views, and components
-angular.module('myApp', [
-  'ngRoute',
-  'myApp.view1',
-  'myApp.view2',
-  'myApp.version'
-]).
-config(['$routeProvider', function($routeProvider) {
-  $routeProvider.otherwise({redirectTo: '/view1'});
-}]);
+    'use strict';
+
+    // Declare app level module which depends on views, and components
+    angular.module('myApp', [
+        'ngRoute',
+        'moviecat.in_theaters',
+        'moviecat.coming_soon',
+        'moviecat.top250'
+    ]).config(['$routeProvider', function($routeProvider) {
+        $routeProvider.otherwise({ redirectTo: '/in_theaters' });
+    }]);
+
+})(angular)
