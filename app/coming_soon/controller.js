@@ -10,8 +10,14 @@
         });
     }]);
 
-    module.controller('ComingSoonController', ['$scope', function($scope) {
-
+    module.controller('ComingSoonController', ['$scope', '$http', function($scope, $http) {
+        $http.get('/app/comming_soon.json').then(
+            function(data) {
+                $scope.dataList = data.data.subjects;
+            },
+            function(err) {
+                console.log(err);
+            });
     }]);
 
 })(angular)

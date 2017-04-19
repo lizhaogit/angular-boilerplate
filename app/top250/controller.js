@@ -10,8 +10,14 @@
         });
     }]);
 
-    module.controller('top250Controller', ['$scope', function($scope) {
-
+    module.controller('top250Controller', ['$scope', '$http', function($scope, $http) {
+        $http.get('/app/top.json').then(
+            function(data) {
+                $scope.dataList = data.data.subjects;
+            },
+            function(err) {
+                console.log(err);
+            });
     }]);
 
 })(angular)
