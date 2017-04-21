@@ -1,7 +1,7 @@
 (function(angular) {
     'use strict';
 
-    var module = angular.module('moviecat.in_theaters', ['ngRoute']);
+    var module = angular.module('moviecat.in_theaters', ['ngRoute', 'moviecat.services.http']);
 
     module.config(['$routeProvider', function($routeProvider) {
         $routeProvider.when('/in_theaters', {
@@ -10,18 +10,16 @@
         });
     }]);
 
-    module.controller('InTheatresController', ['$scope', '$http', function($scope, $http) {
+    module.controller('InTheatresController', ['$scope', 'HttpService', function($scope, HttpService) {
 
-        $http.get('/app/in_theaters.json').then(
-            function(data) {
-                $scope.dataList = data.data.subjects;
-
-            },
-            function(err) {
-                console.log(err);
-            });
+        $scope.dataList = [];
+        $scope.message = '';
+        HttpService.jsonp('https://api.douban.com/v2/movie/in_theaters', {}, function(data) {
+            $scope.dataList = data.subjects;
+            $scope.$apply('dataList');
+        })
     }]);
 
 
 
-})(angular)
+})(angular);
