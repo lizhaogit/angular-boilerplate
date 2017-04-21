@@ -11,12 +11,15 @@
     }]);
 
     module.controller('InTheatresController', ['$scope', 'HttpService', function($scope, HttpService) {
-
+        $scope.loading = true;
         $scope.dataList = [];
         $scope.message = '';
+        $scope.totalCount = 0;
         HttpService.jsonp('https://api.douban.com/v2/movie/in_theaters', {}, function(data) {
             $scope.dataList = data.subjects;
-            $scope.$apply('dataList');
+            $scope.totalCount = data.total;
+            $scope.loading = false;
+            $scope.$apply();
         })
     }]);
 

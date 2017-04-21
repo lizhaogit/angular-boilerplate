@@ -11,11 +11,14 @@
     }]);
 
     module.controller('ComingSoonController', ['$scope', 'HttpService', function($scope, HttpService) {
+        $scope.loading = true;
         $scope.dataList = [];
         $scope.message = '';
+        $scope.totalCount = 0;
         HttpService.jsonp('https://api.douban.com/v2/movie/coming_soon', {}, function(data) {
             $scope.dataList = data.subjects;
-            $scope.$apply('dataList');
+            $scope.loading = false;
+            $scope.$apply();
         })
     }]);
 
