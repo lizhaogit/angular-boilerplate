@@ -9,7 +9,7 @@
         'moviecat.coming_soon',
         'moviecat.top250'
     ]).config(['$routeProvider', function($routeProvider) {
-        $routeProvider.otherwise({ redirectTo: '/in_theaters' });
+        $routeProvider.otherwise({ redirectTo: '/in_theaters/1' });
     }]);
 
 })(angular)
